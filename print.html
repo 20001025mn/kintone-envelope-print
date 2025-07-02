@@ -24,7 +24,9 @@
 
   <script>
     function getParam(name) {
-      return decodeURIComponent((new URLSearchParams(window.location.search)).get(name) || "");
+      return decodeURIComponent(
+        (new URLSearchParams(window.location.search)).get(name) || ""
+      );
     }
 
     const postal = getParam("postal");
@@ -32,10 +34,15 @@
     const city = getParam("city");
     const company = getParam("company");
 
-    const addressText = `〒${postal}\n${prefecture}${city}\n${company} 御中`;
-    document.getElementById("addressBox").innerText = addressText;
+    if (postal || prefecture || city || company) {
+      const addressText = `〒${postal}\n${prefecture}${city}\n${company} 御中`;
+      document.getElementById("addressBox").innerText = addressText;
 
-    setTimeout(() => window.print(), 800);
+      // 印刷実行
+      setTimeout(() => window.print(), 800);
+    } else {
+      document.getElementById("addressBox").innerText = "パラメータが見つかりませんでした。";
+    }
   </script>
 </body>
 </html>
