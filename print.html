@@ -5,7 +5,7 @@
   <title>封筒印刷</title>
   <style>
     @page {
-      size: 240mm 332mm; /* 角2封筒 */
+      size: 240mm 332mm;
       margin: 0;
     }
 
@@ -13,22 +13,22 @@
       margin: 0;
       padding: 0;
       font-family: "MS PGothic", sans-serif;
-      position: relative;
       width: 240mm;
       height: 332mm;
+      position: relative;
     }
 
     .postal {
       position: absolute;
-      top: 40mm;
-      left: 130mm;
+      top: 35mm;
+      left: 150mm;
       font-size: 16pt;
     }
 
     .company {
       position: absolute;
       top: 80mm;
-      left: 70mm;
+      left: 60mm;
       font-size: 20pt;
       white-space: pre-line;
       line-height: 1.5;
@@ -38,7 +38,7 @@
     .address {
       position: absolute;
       top: 130mm;
-      left: 50mm;
+      left: 60mm;
       font-size: 14pt;
       white-space: pre-line;
       line-height: 1.6;
@@ -64,7 +64,6 @@
     const company = getParam("company");
     const person = getParam("person");
 
-    // 表示構成
     const postalText = `〒${postal}`;
     const companyText = person
       ? `${company}\n${person} 様`
