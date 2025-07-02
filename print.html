@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>封筒印刷</title>
+  <style>
+    body {
+      font-family: "Yu Gothic", sans-serif;
+      margin: 100px 50px;
+      transform: rotate(90deg); /* A4封筒に合わせた回転 */
+      transform-origin: left top;
+      width: 297mm;
+      height: 210mm;
+    }
+    .address {
+      font-size: 20pt;
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+  <div class="address" id="addressBox">読み込み中...</div>
+
+  <script>
+    async function fetchRecord() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get("id");
+      const resp = await fetch("https://hz6n32v7pq52.cybozu.com/k/v1/record.json?app=171&id=" + id, {
+        headers: {
+          "X-Cybozu-API-Token": "19siJIolJVpiAhzsX3Wu2GQmZfRBsKE1pSEmi6dg"
+        }
+      });
+
+      const data = await resp.json();
+      const r = data.record;
+
+      const addressText = `〒${r["postal_code"].value}\n${r["prefecture"].value}${r["city_and_area"].value}\n${r["会社名＿文字列"].value} 御中`;
+
+      document.getElementById("addressBox").innerText = addressText;
+
+      setTimeout(() => window.print(), 1000);
+    }
+
+    fetchRecord();
+  </script>
+</body>
+</html>
