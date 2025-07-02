@@ -26,13 +26,16 @@
     async function fetchRecord() {
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get("id");
+      console.log("取得するレコードID:", id);
       const resp = await fetch("https://hz6n32v7pq52.cybozu.com/k/v1/record.json?app=171&id=" + id, {
         headers: {
           "X-Cybozu-API-Token": "19siJIolJVpiAhzsX3Wu2GQmZfRBsKE1pSEmi6dg"
         }
       });
 
+      console.log("API応答ステータス:", resp.status); 
       const data = await resp.json();
+      console.log("取得したレコード内容:", data);
       const r = data.record;
 
       const addressText = `〒${r["postal_code"].value}\n${r["prefecture"].value}${r["city_and_area"].value}\n${r["会社名＿文字列"].value} 御中`;
