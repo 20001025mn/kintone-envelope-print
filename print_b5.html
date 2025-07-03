@@ -17,7 +17,18 @@
       height: 235mm;
       position: relative;
     }
-
+    
+/* ← 横向きレイアウト全体を90度回転 */
+  #rotated {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 235mm;
+    height: 120mm;
+    transform: rotate(90deg);
+    transform-origin: left top;
+　 }
+    
     .postal {
       position: absolute;
       top: 30px;
